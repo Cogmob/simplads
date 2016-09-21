@@ -1,0 +1,30 @@
+# Simplads #
+
+Simplads are a way to structure complicated algorithms. Design and test each function independently and provide a single linking function to explain exactly what the code does. Elegantly introduce stateful operations only when needed without sacrificing readability or testability.
+
+### Example usage ###
+
+```python
+from simplads import Bundle, WriterDeltaMaker, ReaderDeltamaker, lift
+write = WriterDeltaMaker.write
+read = ReaderDeltaMaker.read
+
+# read and write example
+def example():
+    obj = {}
+    b = Bundle().add_writer(obj).add_reader(obj)
+    return b.unit().pipe([
+        write,
+        read,
+        lift(lambda i: i.read_val)])
+
+def read(i):
+    return Bundle.delta(i, 'writer', write(keys=['keys'], new_data='val'))
+
+def write(i):
+    return Bundle.delta(i, 'reader', read(['key']))
+```
+
+### Installation ###
+
+    pip install simplads
