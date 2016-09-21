@@ -1,8 +1,8 @@
-from delta_type import DeltaType
-from namedtuples.bind_args import BindArgs
-from namedtuples.bound import Bound
-from simplad_base import SimpladBase
-from simplad_monad import WrappedDelta
+from .delta_type import DeltaType
+from .namedtuples.bind_args import BindArgs
+from .namedtuples.bound import Bound
+from .simplad_base import SimpladBase
+from .simplad_monad import WrappedDelta
 import abc
 
 '''

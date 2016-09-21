@@ -1,7 +1,8 @@
-from delta_type import DeltaType
-from namedtuples.bind_args import BindArgs
-from namedtuples.simplad_result import SimpladResult
-from namedtuples.wrapped_delta import WrappedDelta
+from .delta_type import DeltaType
+from .namedtuples.bind_args import BindArgs
+from .namedtuples.simplad_result import SimpladResult
+from .namedtuples.wrapped_delta import WrappedDelta
+from functools import reduce
 
 def compose(functions):
         return reduce(
@@ -63,7 +64,7 @@ class SimpladMonad(object):
     @classmethod
     def add_simplads(cls, simplads):
         def ret(sm):
-            for key, simplad in simplads.iteritems():
+            for key, simplad in simplads.items():
                 sm = cls.add_simplad(key=key, simplad=simplad)(sm=sm)
             return sm
         return ret
@@ -101,7 +102,9 @@ class SimpladMonad(object):
 
     @classmethod
     def bind(cls, func):
-        def ret((sm, bound_before)):
+        def ret(i):
+            sm = i[0]
+            bound_before = i[1]
             functions = sm['binds'] + [cls.get_box(sm), func]
             functions.reverse()
             return sm, compose(functions)(bound_before)

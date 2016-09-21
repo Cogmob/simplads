@@ -1,6 +1,6 @@
 from simplads.simplad_monad.namedtuples.delta_overwrite import DeltaOverwrite
 from simplads.simplad_monad.simplad_base_helper import SimpladBaseHelper
-from namedtuples.writer_delta import WriterDelta
+from .namedtuples.writer_delta import WriterDelta
 import abc
 
 # bind (func)(((unbound, annotation), higher_deltas))
@@ -11,7 +11,7 @@ class WriterSimplad(SimpladBaseHelper):
     @staticmethod
     def initial_annotation(unbound):
         def printit(keys, val):
-            print 'not initialised'
+            print('not initialised')
         return printit
 
     @staticmethod

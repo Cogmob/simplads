@@ -1,8 +1,8 @@
 from collections import namedtuple
 from simplads.simplad_monad.namedtuples.delta_overwrite import DeltaOverwrite
 from simplads.simplad_monad.simplad_base_helper import SimpladBaseHelper
-from namedtuples.reader_delta import ReaderDelta
-from namedtuples.reader_result import ReaderResult
+from .namedtuples.reader_delta import ReaderDelta
+from .namedtuples.reader_result import ReaderResult
 import abc
 
 # bind (func)(((unbound, annotation), higher_deltas))
