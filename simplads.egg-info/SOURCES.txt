@@ -6,6 +6,7 @@ simplads.egg-info/SOURCES.txt
 simplads.egg-info/dependency_links.txt
 simplads.egg-info/top_level.txt
 simplads/simplad_bundle/__init__.py
+simplads/simplad_bundle/pipe.py
 simplads/simplad_bundle/simplad_bundle.py
 simplads/simplad_monad/__init__.py
 simplads/simplad_monad/delta_type.py
