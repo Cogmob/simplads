@@ -1,6 +1,6 @@
 Metadata-Version: 1.0
 Name: simplads
-Version: 0.26
+Version: 0.27
 Summary: A set of tools for conveniently using monads
 Home-page: https://github.com/Cogmob/simplads
 Author: Luke Avery
@@ -36,4 +36,7 @@ Description: # Simplads #
         ### Installation ###
         
             pip install simplads
+        
+        
+        
 Platform: UNKNOWN

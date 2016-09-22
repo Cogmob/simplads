@@ -4,7 +4,7 @@ def add_first_data(key, *args):
     vals = [i for i in args][1::2]
     def func(i):
         i = {stored_key: i}
-        for a, key in keys.items():
-            i[key] = vals[a]
+        for a in count(keys):
+            i[keys[a]] = vals[a]
         return i
     return func
