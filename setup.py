@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
         name='simplads',
-        version='0.28',
+        version='0.29',
         author='Luke Avery',
         author_email='cogmob@gmail.com',
         url='https://github.com/Cogmob/simplads',
