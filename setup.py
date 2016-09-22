@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
         name='simplads',
-        version='0.20',
+        version='0.21',
         author='Luke Avery',
         description=('A set of tools for conveniently using monads'),
         packages=[
