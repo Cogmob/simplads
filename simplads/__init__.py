@@ -7,3 +7,5 @@ from .simplad_bundle.simplad_bundle import SimpladBundle as Bundle
 from .simplad_bundle.pipe import pipe
 from .simplad_bundle.lift import lift
 from .simplad_bundle.add_data import add_data
+from .simplad_bundle.add_first_data import add_first_data
+from .simplad_bundle.remove_data import remove_data
