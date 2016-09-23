@@ -9,3 +9,4 @@ from .simplad_bundle.lift import lift
 from .simplad_bundle.add_data import add_data
 from .simplad_bundle.add_first_data import add_first_data
 from .simplad_bundle.remove_data import remove_data
+from .simplad_bundle.pr import pr
