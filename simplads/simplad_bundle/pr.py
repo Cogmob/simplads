@@ -1,3 +1,6 @@
+import pprint
+pp = pprint.PretyPrinter(indent=4)
+
 def pr(i):
-    print(i)
+    pp.pprint(i)
     return i
