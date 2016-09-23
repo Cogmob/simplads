@@ -1,3 +1,3 @@
 def pr(i):
-    print i
+    print(i)
     return i

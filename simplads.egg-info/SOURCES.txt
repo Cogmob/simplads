@@ -11,6 +11,7 @@ simplads/simplad_bundle/add_data.py
 simplads/simplad_bundle/add_first_data.py
 simplads/simplad_bundle/lift.py
 simplads/simplad_bundle/pipe.py
+simplads/simplad_bundle/pr.py
 simplads/simplad_bundle/remove_data.py
 simplads/simplad_bundle/simplad_bundle.py
 simplads/simplad_monad/__init__.py
