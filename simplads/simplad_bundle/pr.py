@@ -1,6 +1,5 @@
 import pprint
-pp = pprint.PrettyPrinter(indent=4)
 
 def pr(i):
-    print(pp.pprint(i))
+    print(pprint.pprint(i, indent=4))
     return i
