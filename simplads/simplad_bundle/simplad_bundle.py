@@ -3,6 +3,7 @@ from simplads.simplad_monad.namedtuples.bind_args import BindArgs
 from simplads.simplad_monad.namedtuples.simplad_result import SimpladResult
 from simplads.simplads.reader_simplad import ReaderSimplad, ReaderDeltaMaker
 from simplads.simplads.writer_simplad import WriterSimplad, WriterDeltaMaker
+from simplads.simplads.error_simplad import ErrorSimplad
 
 class SimpladBundle(object):
     def __init__(self):
@@ -27,6 +28,11 @@ class SimpladBundle(object):
         self.sm = SimpladMonad.push_simplad(
             key='reader', simplad=ReaderSimplad())(self.sm)
         self.init_deltas['reader'] = ReaderDeltaMaker.set_obj(obj)
+        return self
+
+    def add_error(self, obj):
+        self.sm = SimpladMonad.push_simplad(
+            key='error', simplad=ErrorSimplad())(self.sm)
         return self
 
     def unit(self, unbound=None):
