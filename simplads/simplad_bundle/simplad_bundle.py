@@ -30,7 +30,7 @@ class SimpladBundle(object):
         self.init_deltas['reader'] = ReaderDeltaMaker.set_obj(obj)
         return self
 
-    def add_error(self, obj):
+    def add_error(self):
         self.sm = SimpladMonad.push_simplad(
             key='error', simplad=ErrorSimplad())(self.sm)
         return self

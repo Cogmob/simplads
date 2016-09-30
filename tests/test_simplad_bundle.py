@@ -8,6 +8,9 @@ from simplads import MaybeSimplad, MaybeDeltaMaker
 from simplads import WriterDeltaMaker
 from simplads import ReaderDeltaMaker
 
+from simplads import fin
+from simplads import retu
+
 lift = Bundle.lift
 res = Bundle.res
 
@@ -74,3 +77,16 @@ class TestBundle(unittest.TestCase):
         ])
 
         expect(result).to_equal('not set')
+
+    def test_fin(self):
+        def double_s(i): return 2*i
+        double = lift(double_s)
+        res = fin(1).add_error().pipe(double, double, double)
+        expect(res).to_equal(8)
+
+    def test_error_happens_end(self):
+        def double(i): return retu.rn(2*i)
+        def error(i): return retu.error(2*i, 'error text')
+        res = fin(1).add_error().pipe(double, double, error)
+        expect(res).to_equal(8)
+        res = fin(1)

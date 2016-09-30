@@ -1,3 +1,5 @@
+from simplads.simplad_monad.simplad_base_helper import Bound
+
 from compare import expect
 from fn import F
 from functools import partial
@@ -246,8 +248,7 @@ class TestSimpladMonad(unittest.TestCase):
 #        unit = SM.unit(sm)
 #        bind = SM.bind(
 #            func = get_echo(Bound(unbound=8,
-#                annotation={'s2':MaybeType.no_value})),
-#            sm = sm)
+#                annotation={'s2':MaybeType.no_value})))
 #
 #        result = (F() >> unit >> add_deltas >> bind >> bind >> bind)(4)
 #        expect(result).to_equal(
@@ -255,38 +256,44 @@ class TestSimpladMonad(unittest.TestCase):
 #                unbound=Bound(unbound=None, annotation=MaybeType.no_value),
 #                annotation=MaybeType.has_value), deltas=[]))
 
-#    def test_pushing_simplad(self):
-#        add_maybe = SM.push_simplad(simplad=MS())
-#        add_log = SM.push_simplad(simplad=LogSimplad())
-#        sm1 = (F() >> add_maybe >> add_maybe >> add_log)(SM.make())
-#
-#        add_simplads = SM.add_simplads({
-#            '1': MS(),
-#            '2': MS(),
-#            '3': LogSimplad(),
-#        })
-#        order = SM.set_simplad_order(['1','2','3'])
-#        sm2 = (F() >> add_simplads >> order)(SM.make())
-#
-#        expect(SM.unit(sm1)(4)).to_equal(SM.unit(sm2)(4))
-#
-#    def test_pushing_simplad_bind(self):
-#        add_maybe = SM.push_simplad(simplad=MS())
-#        add_log = SM.push_simplad(simplad=LogSimplad())
-#        sm1 = (F() >> add_maybe >> add_maybe >> add_log)(SM.make())
-#
-#        add_simplads = SM.add_simplads({
-#            '1': MS(),
-#            '2': MS(),
-#            '3': LogSimplad(),
-#        })
-#        order = SM.set_simplad_order(['1','2','3'])
-#        sm2 = (F() >> add_simplads >> order)(SM.make())
-#
-#        bind1 = SM.bind(func = add_customs, sm = sm1)
-#        bind2 = SM.bind(func = add_customs, sm = sm2)
-#
-#        binds1 = (F() >> SM.unit(sm1) >> add_deltas >> bind1 >> bind1)(4)
-#        binds2 = (F() >> SM.unit(sm2) >> add_deltas >> bind2 >> bind2)(4)
-#
-#        expect(binds1).to_equal(binds2)
+    def test_pushing_simplad(self):
+        add_maybe = SM.push_simplad(simplad=MS())
+        add_log = SM.push_simplad(simplad=LogSimplad())
+        sm1 = (F() >> add_maybe >> add_maybe >> add_log)(SM.make())
+
+        add_simplads = SM.add_simplads({
+            '1': MS(),
+            '2': MS(),
+            '3': LogSimplad(),
+        })
+        order = SM.set_simplad_order(['1','2','3'])
+        sm2 = (F() >> add_simplads >> order)(SM.make())
+
+        expect(SM.unit(sm1)(4)).to_equal(SM.unit(sm2)(4))
+
+    @attr('s')
+    def test_pushing_simplad_bind(self):
+        add_maybe = SM.push_simplad(simplad=MS())
+        add_log = SM.push_simplad(simplad=LogSimplad())
+        sm1 = (F() >> add_maybe >> add_maybe >> add_log)(SM.make())
+
+        def box(sm):
+            def f(i):
+                return (sm, BindArgs(bound=i, deltas=[]))
+            return f
+
+        add_simplads = SM.add_simplads({
+            '1': MS(),
+            '2': MS(),
+            '3': LogSimplad(),
+        })
+        order = SM.set_simplad_order(['1','2','3'])
+        sm2 = (F() >> add_simplads >> order)(SM.make())
+
+        bind1 = SM.bind(func = add_customs)
+        bind2 = SM.bind(func = add_customs)
+
+        binds1 = (F() >> SM.unit(sm1) >> box(sm1) >> bind1 >> bind1)(4)
+        binds2 = (F() >> SM.unit(sm2) >> box(sm2) >> add_simplads >> bind2 >> bind2)(4)
+
+        expect(binds1).to_equal(binds2)
