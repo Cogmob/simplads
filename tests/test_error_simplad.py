@@ -34,15 +34,14 @@ class TestErrorSimplad(unittest.TestCase):
             ['higher deltas', True])).to_equal(
                 BindArgs(bound=2, deltas=['higher deltas', True]))
 
-    @attr('s')
     def test_apply_delta_has_value_to_has_value(self):
         expect(apply_delta(ErrorType.none, ErrorDeltaMaker.no_error(), 5)).to_equal(
                 (ErrorType.none, DeltaOverwrite()))
 
+    @attr('s')
     def test_apply_delta_has_value_to_no_value(self):
-        expect(apply_delta(True, ErrorDeltaMaker.error('error_text')), None).to_equal(
-                (ErrorType.no_value, DeltaOverwrite(
-                    overwrite=True, new_value=None)))
+        expect(apply_delta(ErrorType.error, ErrorDeltaMaker.no_error(), 4)).to_equal(
+                (ErrorType.none, DeltaOverwrite()))
 
     def test_bind_has_value_to_has_value(self):
         result_value = BindArgs(bound=8, deltas=['higher deltas',
