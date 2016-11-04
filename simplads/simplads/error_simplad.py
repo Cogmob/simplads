@@ -27,9 +27,11 @@ class ErrorSimplad(SimpladBaseHelper):
     @staticmethod
     # returns annotation, overwrite_unbound
     def apply_delta(annotation, delta, unbound):
+        print('okay')
         if delta[0] is ErrorType.none:
             return delta[0], DeltaOverwrite()
         if delta[0] is ErrorType.error:
+            print('now')
             return delta[0], DeltaOverwrite(
                 overwrite=True,
                 new_value=ErrorRes(has_error=True, error_text=delta[1], result=unbound))

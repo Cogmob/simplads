@@ -88,6 +88,7 @@ class SimpladMonad(object):
                 delta_map = res.delta_map
                 delta_keys = delta_map.keys()
                 def f(acc, name):
+                    print('asdf')
                     if name in delta_keys:
                         acc.append(WrappedDelta(type=DeltaType.configured,
                             delta=delta_map[name]))

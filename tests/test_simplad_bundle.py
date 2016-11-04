@@ -84,9 +84,10 @@ class TestBundle(unittest.TestCase):
         res = fin(1).add_error().pipe(double, double, double)
         expect(res).to_equal(8)
 
+    #@attr('s')
     def test_error_happens_end(self):
         def double(i): return retu.rn(2*i)
         def error(i): return retu.error(2*i, 'error text')
         res = fin(1).add_error().pipe(double, double, error)
-        expect(res).to_equal(8)
+        expect(res).to_equal(9)
         res = fin(1)
